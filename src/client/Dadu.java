@@ -1,3 +1,5 @@
+package client;
+
 
 import java.util.Random;
 
@@ -22,7 +24,7 @@ public class Dadu {
         this.jumlah = jumlah;
     }
     
-    public static int rollDadu(){
+    public int rollDadu(){
         return (int)(Math.random()*6+1);
     }
 }

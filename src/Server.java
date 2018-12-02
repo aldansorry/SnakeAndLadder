@@ -1,4 +1,5 @@
 
+import client.Dadu;
 import java.net.*;
 import java.io.*;
 
@@ -38,6 +39,7 @@ class RecieveFromClientThread implements Runnable {
     BufferedReader brBufferedReader = null;
     PrintWriter printWriter;
     Dadu dadu;
+    boolean isTurn = false;
     int[][] tangga;
     int[][] ular;
     
