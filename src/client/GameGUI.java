@@ -48,7 +48,6 @@ public class GameGUI extends javax.swing.JFrame {
         ruleList = new ArrayList<RuleClient>();
         stringBoard = new ArrayList<JLabel>();
         dadu = new Dadu();
-        createBoard(5, 5);
     }
 
     public boolean isConnected() {

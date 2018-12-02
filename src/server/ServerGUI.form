@@ -93,11 +93,15 @@
                           <Component id="jTextPort" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="67" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTextStartServer" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextJmlPlayer" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="jTextBoardX" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="jTextBoardY" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -116,7 +120,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextJmlPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextBoardX" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextBoardY" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextStartServer" min="-2" max="-2" attributes="0"/>
@@ -133,11 +142,11 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextPort">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextJmlPlayer">
+        <Component class="javax.swing.JTextField" name="jTextBoardX">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Jml Player"/>
+            <Property name="text" type="java.lang.String" value="Board X"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jTextStartServer">
@@ -147,6 +156,13 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextStartServerActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextBoardY">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Board Y"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -49,6 +49,9 @@ public class ClientThread implements Runnable {
                 String CMD = st.nextToken();
 
                 if (CMD.equals("GAME_START")) {
+                    String boardXY = st.nextToken();
+                    String[] getXY = boardXY.split("::");
+                    gameGUI.createBoard(Integer.valueOf(getXY[0]), Integer.valueOf(getXY[1]));
                     if (st.hasMoreTokens()) {
                         String listPlayerData = st.nextToken();
                         String[] listPlayer = listPlayerData.split("~");

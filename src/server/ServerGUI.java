@@ -31,6 +31,8 @@ public class ServerGUI extends javax.swing.JFrame {
     public ArrayList<Player> listPlayer;
     
     int turnIdx=0;
+    
+    int boardX, boardY;
     /**
      * Creates new form ServerGUI
      */
@@ -38,6 +40,10 @@ public class ServerGUI extends javax.swing.JFrame {
         initComponents();
         listRule = new ArrayList<Rule>();
         listPlayer = new ArrayList<Player>();
+        boardX = 5;
+        boardY = 5;
+        jTextBoardX.setText(String.valueOf(boardX));
+        jTextBoardY.setText(String.valueOf(boardY));
     }
 
     public void nextTurn(){
@@ -55,7 +61,19 @@ public class ServerGUI extends javax.swing.JFrame {
         for (int i = 0; i < listRule.size(); i++) {
             if (listRule.get(i).getFrom() == newPos) {
                 newPos = listRule.get(i).getTo();
+                String typeRule = "";
+                if (listRule.get(i).getType().equals("S")) {
+                    typeRule = "Bited by Snake";
+                }else{
+                    typeRule = "raise Ladder";
+                }
+                sendInfo(listPlayer.get(idxPlayer).getPlayerName(),typeRule+" to "+listRule.get(i).getTo());
             }
+        }
+        int posWin = boardX*boardY;
+        if (newPos >= posWin) {
+            sendInfo(listPlayer.get(idxPlayer).getPlayerName()+" Menang","Telah Menang");
+            newPos = posWin;
         }
         listPlayer.get(idxPlayer).setPosition(newPos);
         
@@ -136,9 +154,11 @@ public class ServerGUI extends javax.swing.JFrame {
         jPanelConfigure = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextPort = new javax.swing.JTextField();
-        jTextJmlPlayer = new javax.swing.JTextField();
+        jTextBoardX = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextStartServer = new javax.swing.JButton();
+        jTextBoardY = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTextRuleTo = new javax.swing.JTextField();
@@ -165,7 +185,7 @@ public class ServerGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Port");
 
-        jLabel2.setText("Jml Player");
+        jLabel2.setText("Board X");
 
         jTextStartServer.setText("Start Server");
         jTextStartServer.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +193,8 @@ public class ServerGUI extends javax.swing.JFrame {
                 jTextStartServerActionPerformed(evt);
             }
         });
+
+        jLabel8.setText("Board Y");
 
         javax.swing.GroupLayout jPanelConfigureLayout = new javax.swing.GroupLayout(jPanelConfigure);
         jPanelConfigure.setLayout(jPanelConfigureLayout);
@@ -186,11 +208,14 @@ public class ServerGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextPort, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigureLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addGroup(jPanelConfigureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelConfigureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextStartServer)
-                            .addComponent(jTextJmlPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextBoardX, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextBoardY, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanelConfigureLayout.setVerticalGroup(
@@ -203,7 +228,11 @@ public class ServerGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelConfigureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextJmlPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextBoardX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelConfigureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextBoardY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextStartServer)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -394,6 +423,8 @@ public class ServerGUI extends javax.swing.JFrame {
     private void jTextStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStartServerActionPerformed
         // TODO add your handling code here:
         int port = Integer.parseInt(jTextPort.getText());
+        this.boardX = Integer.valueOf(jTextBoardX.getText());
+        this.boardY = Integer.valueOf(jTextBoardY.getText());
         serverThread = new ServerThread(port, this);
         t = new Thread(serverThread);
         t.start();
@@ -407,6 +438,7 @@ public class ServerGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         turnIdx=0;
         listPlayer.get(turnIdx).setIsTurn(true);
+        String boardXY = this.boardX+"::"+this.boardY;
         String listPlayerData = "";
         for (int i = 0; i < listPlayer.size(); i++) {
             listPlayerData += listPlayer.get(i).getPlayerName()+"::"+listPlayer.get(i).getPosition()+"::"+String.valueOf(listPlayer.get(i).isIsTurn())+"~";
@@ -421,7 +453,7 @@ public class ServerGUI extends javax.swing.JFrame {
                 Socket tsoc2 = (Socket) this.socketList.elementAt(x);
                 DataOutputStream dos2 = new DataOutputStream(tsoc2.getOutputStream());
                 
-                dos2.writeUTF("GAME_START " + listPlayerData+" "+listRuleData);
+                dos2.writeUTF("GAME_START " +boardXY+" "+ listPlayerData+" "+listRuleData);
             } catch (IOException e) {
                 this.appendConsole("[GAME START]: " + e.getMessage());
             }
@@ -490,6 +522,7 @@ public class ServerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -501,7 +534,8 @@ public class ServerGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JTextArea jTextAreaPlayerList;
-    private javax.swing.JTextField jTextJmlPlayer;
+    private javax.swing.JTextField jTextBoardX;
+    private javax.swing.JTextField jTextBoardY;
     private javax.swing.JTextField jTextPort;
     private javax.swing.JTextField jTextRuleFrom;
     private javax.swing.JTextField jTextRuleTo;
