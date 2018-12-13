@@ -47,5 +47,15 @@ public class ServerThread implements Runnable {
             serverGUI.appendConsole("[ServerThreadIOException]: "+ e.getMessage());
         }
     }
-    
+   
+    public void stop(){
+        try {
+            serverSocket.close();
+            keepGoing = false;
+            System.out.println("Server dihentikan..");
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

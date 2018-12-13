@@ -396,11 +396,16 @@
     <Component class="javax.swing.JButton" name="jButtonStopServer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Stop Server"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonStopServerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonGameStart">
       <Properties>
         <Property name="text" type="java.lang.String" value="Start Game"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGameStartActionPerformed"/>

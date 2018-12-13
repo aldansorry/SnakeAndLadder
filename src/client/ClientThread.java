@@ -40,14 +40,13 @@ public class ClientThread implements Runnable {
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
+                
                 String data = dis.readUTF();
                 System.out.println(data);
                 st = new StringTokenizer(data);
-                /**
-                 * Get Message CMD *
-                 */
                 String CMD = st.nextToken();
 
+                
                 if (CMD.equals("GAME_START")) {
                     String boardXY = st.nextToken();
                     String[] getXY = boardXY.split("::");
@@ -58,7 +57,8 @@ public class ClientThread implements Runnable {
 
                         for (int i = 0; i < listPlayer.length; i++) {
                             String[] player = listPlayer[i].split("::");
-                            gameGUI.addPlayer(player[0], "P" + String.valueOf(i + 1), Integer.valueOf(player[1]),Boolean.valueOf(player[2]));
+                            gameGUI.addPlayer(player[0], "P" + String.valueOf(i + 1), 
+                                    Integer.valueOf(player[1]),Boolean.valueOf(player[2]));
                             gameGUI.refreshListPlayer();
                         }
                     }

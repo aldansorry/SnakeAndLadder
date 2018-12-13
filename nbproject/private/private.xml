@@ -4,8 +4,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/RecieveThread.java</file>
-            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/Server.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/GameBoard.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/server/ServerThread.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/client/PlayerClient.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/server/Player.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/server/GameThread.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/client/LoginGUI.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/client/ClientThread.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/client/GameGUI.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/server/Rule.java</file>
+            <file>file:/D:/GitHub/Java/SnakeAndLadder/src/server/ServerGUI.java</file>
         </group>
     </open-files>
 </project-private>

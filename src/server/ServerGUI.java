@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -367,8 +368,15 @@ public class ServerGUI extends javax.swing.JFrame {
         );
 
         jButtonStopServer.setText("Stop Server");
+        jButtonStopServer.setEnabled(false);
+        jButtonStopServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStopServerActionPerformed(evt);
+            }
+        });
 
         jButtonGameStart.setText("Start Game");
+        jButtonGameStart.setEnabled(false);
         jButtonGameStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGameStartActionPerformed(evt);
@@ -421,7 +429,6 @@ public class ServerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStartServerActionPerformed
-        // TODO add your handling code here:
         int port = Integer.parseInt(jTextPort.getText());
         this.boardX = Integer.valueOf(jTextBoardX.getText());
         this.boardY = Integer.valueOf(jTextBoardY.getText());
@@ -429,8 +436,8 @@ public class ServerGUI extends javax.swing.JFrame {
         t = new Thread(serverThread);
         t.start();
 
-//        new Thread(new OnlineListThread(this)).start();
-        jButtonStopServer.setEnabled(false);
+        jTextStartServer.setEnabled(false);
+        jButtonGameStart.setEnabled(true);
         jButtonStopServer.setEnabled(true);
     }//GEN-LAST:event_jTextStartServerActionPerformed
 
@@ -441,7 +448,9 @@ public class ServerGUI extends javax.swing.JFrame {
         String boardXY = this.boardX+"::"+this.boardY;
         String listPlayerData = "";
         for (int i = 0; i < listPlayer.size(); i++) {
-            listPlayerData += listPlayer.get(i).getPlayerName()+"::"+listPlayer.get(i).getPosition()+"::"+String.valueOf(listPlayer.get(i).isIsTurn())+"~";
+            listPlayerData += listPlayer.get(i).getPlayerName()+"::"
+                    +listPlayer.get(i).getPosition()+"::"
+                    +String.valueOf(listPlayer.get(i).isIsTurn())+"~";
         }
         String listRuleData = "";
         for (int j = 0; j < listRule.size(); j++) {
@@ -473,6 +482,14 @@ public class ServerGUI extends javax.swing.JFrame {
         listRule.add(new Rule(type, Integer.valueOf(jTextRuleFrom.getText()), Integer.valueOf(jTextRuleTo.getText())));
         refreshRuleList();
     }//GEN-LAST:event_jButtonRuleSubmitActionPerformed
+
+    private void jButtonStopServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStopServerActionPerformed
+        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(null, "Tutup Server.?");
+        if(confirm == 0){
+            serverThread.stop();
+        }
+    }//GEN-LAST:event_jButtonStopServerActionPerformed
 
     /**
      * @param args the command line arguments

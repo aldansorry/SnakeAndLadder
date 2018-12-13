@@ -39,10 +39,12 @@ public class GameThread implements Runnable {
     public void run() {
         try {
             while (true) {
+                
                 String data = dis.readUTF();
                 System.out.println(data);
                 st = new StringTokenizer(data);
                 String startWith = st.nextToken();
+                
                 if (startWith.equals("JOIN")) {
                     String clientUsername = st.nextToken();
                     serverGUI.setClientList(clientUsername);
@@ -51,6 +53,7 @@ public class GameThread implements Runnable {
                     serverGUI.addPlayer(clientUsername);
                     serverGUI.appendConsole("[Client]: " + clientUsername + " memasuki chat room !");
                 }
+                
                 if (startWith.equals("ROLL_DADU")) {
                     String playername = st.nextToken();
                     int dadu = Integer.valueOf(st.nextToken());
@@ -62,6 +65,7 @@ public class GameThread implements Runnable {
                     serverGUI.nextTurn();
                     sendRefresh();
                 }
+                
             }
         } catch (IOException e) {
             serverGUI.appendConsole("[SocketThread]: Koneksi Client ditutup !.");
@@ -71,7 +75,9 @@ public class GameThread implements Runnable {
     public void sendRefresh() {
         String listPlayerData = "";
         for (int i = 0; i < serverGUI.listPlayer.size(); i++) {
-            listPlayerData += serverGUI.listPlayer.get(i).getPlayerName()+"::"+serverGUI.listPlayer.get(i).getPosition()+"::"+String.valueOf(serverGUI.listPlayer.get(i).isIsTurn())+"~";
+            listPlayerData += serverGUI.listPlayer.get(i).getPlayerName()+"::"
+                    +serverGUI.listPlayer.get(i).getPosition()+"::"
+                    +String.valueOf(serverGUI.listPlayer.get(i).isIsTurn())+"~";
         }
         for (int x = 0; x < serverGUI.clientList.size(); x++) {
             
